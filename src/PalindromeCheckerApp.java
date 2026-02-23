@@ -1,61 +1,31 @@
+import java.util.Stack;
+
 public class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // UC1: Welcome Message
-        System.out.println("====================================");
-        System.out.println(" Welcome to Palindrome Checker App ");
-        System.out.println(" Version 1.0.0 ");
-        System.out.println("====================================");
-        System.out.println();
+        // UC5: Stack-Based Palindrome Checker
+        String input = "noon";
 
-        // UC2: Hardcoded Palindrome Check (StringBuilder)
-        String word = "madam";
-        String reversed = new StringBuilder(word).reverse().toString();
+        Stack<Character> stack = new Stack<>();
 
-        if (word.equals(reversed)) {
-            System.out.println("UC2 Result: " + word + " is a palindrome.");
-        } else {
-            System.out.println("UC2 Result: " + word + " is NOT a palindrome.");
-        }
-        System.out.println();
-
-        // UC3: Palindrome Check Using String Reverse (Loop)
-        String input = "level";
-        String reverse = "";
-
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reverse = reverse + input.charAt(i);
+        // Push characters into stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
 
-        if (input.equals(reverse)) {
-            System.out.println("UC3 Result: " + input + " is a palindrome.");
-        } else {
-            System.out.println("UC3 Result: " + input + " is NOT a palindrome.");
-        }
-        System.out.println();
-
-        // UC4: Character Array Based Palindrome Check (Two-Pointer)
-        String text = "radar";
-        char[] chars = text.toCharArray();
-
-        int start = 0;
-        int end = chars.length - 1;
         boolean isPalindrome = true;
 
-        while (start < end) {
-            if (chars[start] != chars[end]) {
+        // Pop and compare
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
-        if (isPalindrome) {
-            System.out.println("UC4 Result: " + text + " is a palindrome.");
-        } else {
-            System.out.println("UC4 Result: " + text + " is NOT a palindrome.");
-        }
+        // Print result
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
